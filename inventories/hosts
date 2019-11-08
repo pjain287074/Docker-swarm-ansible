@@ -1,0 +1,2 @@
+[All]
+localhost ansible_ssh_host=ec2-3-227-2-156.compute-1.amazonaws.com ansible_ssh_user=ubuntu

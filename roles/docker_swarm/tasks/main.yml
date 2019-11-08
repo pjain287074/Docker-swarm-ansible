@@ -1,0 +1,3 @@
+---
+# tasks file for docker-swarm
+- include: swarm_manager.yml

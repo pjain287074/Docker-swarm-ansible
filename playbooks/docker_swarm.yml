@@ -1,0 +1,5 @@
+---
+- hosts: All
+  roles:
+    - { role: /Users/pankajjain/project/other/myproject/git/Docker-swarm-ansible/roles/docker_swarm }
+  become: true

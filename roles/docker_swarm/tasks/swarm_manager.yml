@@ -1,0 +1,55 @@
+---
+- name: Update apt packages
+  become: true
+  apt:
+    name: docker-ce
+    update_cache: true
+    state: latest
+    
+- name: install basic apt packages
+  become: true
+  
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+  
+
+- name: Add an apt key by id from a keyserver
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  
+- name: add apt-repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+
+- name: Update apt packages
+  become: true
+  apt:
+    update_cache: true
+
+- name: install docker packages
+  become: true
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  with_items:
+    - docker-ce=5:18.09.5~3-0~ubuntu-bionic
+    - docker-ce-cli=5:18.09.5~3-0~ubuntu-bionic
+    - containerd.io
+
+- name: add user in  docker group
+  user:
+    name: cloud_user
+    group: docker
+    append: yes  
+
+  
